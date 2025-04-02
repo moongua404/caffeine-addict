@@ -21,6 +21,8 @@ public class CaffeineAddictMode {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
+
+        ModItems.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

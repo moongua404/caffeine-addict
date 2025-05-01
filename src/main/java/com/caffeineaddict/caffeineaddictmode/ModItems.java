@@ -1,6 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode;
 
-import com.example.examplemod.CaffeineAddict;
+import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,7 +25,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> ROASTED_COFFEE_BEAN =
             ITEMS.register("roasted_coffee_bean", () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
-
 
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

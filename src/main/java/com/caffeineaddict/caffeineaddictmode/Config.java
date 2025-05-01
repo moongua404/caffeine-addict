@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.caffeineaddict.caffeineaddictmode;
 
 import com.example.examplemod.CaffeineAddict;
 

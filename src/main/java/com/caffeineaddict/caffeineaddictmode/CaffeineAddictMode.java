@@ -1,19 +1,16 @@
 package com.caffeineaddict.caffeineaddictmode;
 
+import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntities;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -25,7 +22,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
-import com.caffeineaddict.caffeineaddictmode.Config;
 
 @Mod(CaffeineAddictMode.MOD_ID)
 public class CaffeineAddictMode {
@@ -47,6 +43,8 @@ public class CaffeineAddictMode {
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
 
+        ModBlocks.register();
+        GrinderBlockEntities.register();
         ModItems.register();
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);

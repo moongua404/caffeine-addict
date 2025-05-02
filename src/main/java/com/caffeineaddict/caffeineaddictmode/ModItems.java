@@ -3,6 +3,7 @@ package com.caffeineaddict.caffeineaddictmode;
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,6 +26,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> ROASTED_COFFEE_BEAN =
             ITEMS.register("roasted_coffee_bean", () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
+
+    public static RegistryObject<Item> getGrinderItem() {
+        return ModBlocks.GRINDER_ITEM;
+    }
 
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

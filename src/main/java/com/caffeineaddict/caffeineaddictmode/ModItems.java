@@ -27,6 +27,10 @@ public class ModItems {
     public static final RegistryObject<Item> ROASTED_COFFEE_BEAN =
             ITEMS.register("roasted_coffee_bean", () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
+    public static final RegistryObject<Item> GROUND_COFFEE =
+            ITEMS.register("ground_coffee", () ->
+                    new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
+
     public static RegistryObject<Item> getGrinderItem() {
         return ModBlocks.GRINDER_ITEM;
     }

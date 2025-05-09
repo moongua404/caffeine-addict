@@ -1,6 +1,11 @@
 package com.caffeineaddict.caffeineaddictmode;
 
 import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes;
+import com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen;
+
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraftforge.api.distmarker.Dist;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -40,12 +45,15 @@ public class CaffeineAddictMode {
 
     public CaffeineAddictMode() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         modEventBus.addListener(this::commonSetup);
-        MinecraftForge.EVENT_BUS.register(this);
+        //modEventBus.addListener(this::clientSetup);
 
         ModBlocks.register();
         GrinderBlockEntities.register();
         ModItems.register();
+        ModMenuTypes.MENUS.register(modEventBus);
+
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
 
@@ -54,15 +62,23 @@ public class CaffeineAddictMode {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-
+    private void commonSetup(final FMLCommonSetupEvent event) {}
+    private void clientSetup(final FMLClientSetupEvent event) {
+        event.enqueueWork(() -> {
+            net.minecraft.client.gui.screens.MenuScreens.register(
+                    com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes.GRINDER_MENU.get(),
+                    com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen::new
+            );
+        });
     }
 
-    @EventBusSubscriber(modid = MOD_ID, bus = Bus.MOD)
-    public static class ClientModEvents {
+    @Mod.EventBusSubscriber(modid = CaffeineAddictMode.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(final FMLClientSetupEvent event) {
-            
+        public static void clientSetup(final FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                MenuScreens.register(ModMenuTypes.GRINDER_MENU.get(), GrinderScreen::new);
+            });
         }
     }
 }

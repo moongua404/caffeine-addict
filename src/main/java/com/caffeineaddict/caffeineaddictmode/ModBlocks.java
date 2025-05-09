@@ -1,5 +1,7 @@
 package com.caffeineaddict.caffeineaddictmode;
 
+import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlock;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -18,9 +20,12 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, CaffeineAddictMode.MOD_ID);
 
     // 그라인더 블록 등록
+//    public static final RegistryObject<Block> GRINDER_BLOCK =
+//            BLOCKS.register("grinder", () ->
+//                    new Block(BlockBehaviour.Properties.of(Material.STONE).strength(2.0f)));
     public static final RegistryObject<Block> GRINDER_BLOCK =
             BLOCKS.register("grinder", () ->
-                    new Block(BlockBehaviour.Properties.of(Material.STONE).strength(2.0f)));
+                    new GrinderBlock());
 
     // 그라인더 블록 아이템 등록
     public static final RegistryObject<Item> GRINDER_ITEM =

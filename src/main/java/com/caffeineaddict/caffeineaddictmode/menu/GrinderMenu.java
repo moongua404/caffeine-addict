@@ -1,0 +1,59 @@
+package com.caffeineaddict.caffeineaddictmode.menu;
+
+import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntity;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.items.SlotItemHandler;
+
+public class GrinderMenu extends AbstractContainerMenu {
+    private final GrinderBlockEntity blockEntity;
+    private final Level level;
+
+    public GrinderMenu(int id, Inventory playerInv, FriendlyByteBuf extraData) {
+        this(id, playerInv, (GrinderBlockEntity) playerInv.player.level.getBlockEntity(extraData.readBlockPos()));
+    }
+
+    public GrinderMenu(int id, Inventory playerInv, GrinderBlockEntity blockEntity) {
+        super(ModMenuTypes.GRINDER_MENU.get(), id);
+        this.blockEntity = blockEntity;
+        this.level = playerInv.player.level;
+
+        // BlockEntity 슬롯 (0: input, 1: output)
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 56, 35));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 116, 35) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return false;
+            }
+        });
+
+        // 플레이어 인벤토리
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                this.addSlot(new Slot(playerInv, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
+            }
+        }
+
+        // 핫바
+        for (int col = 0; col < 9; ++col) {
+            this.addSlot(new Slot(playerInv, col, 8 + col * 18, 142));
+        }
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return true;
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int index) {
+        return ItemStack.EMPTY; // 나중에 자동 이동 기능을 구현하고 싶다면 이 로직을 바꿔도 돼
+    }
+}

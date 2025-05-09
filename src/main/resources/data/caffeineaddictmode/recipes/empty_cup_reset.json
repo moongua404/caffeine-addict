@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caffeineaddictmode:empty_cup"
+    }
+  ],
+  "result": {
+    "item": "caffeineaddictmode:empty_cup",
+    "count": 1
+  }
+}

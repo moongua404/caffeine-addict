@@ -26,14 +26,14 @@ public class CaffeineAddictMode {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        
     }
 
     @EventBusSubscriber(modid = MOD_ID, bus = Bus.MOD)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
-            
+
         }
     }
 }

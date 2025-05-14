@@ -14,10 +14,11 @@ public class IngredientCup {
 
     public static IngredientCup from(ItemStack stack) {
         IngredientCup cup = new IngredientCup();
-        if (stack.hasTag() && stack.getTag().contains("ingredients", Tag.TAG_LIST)) {
-            ListTag list = stack.getTag().getList("ingredients", Tag.TAG_STRING);
-            for (Tag t : list) {
-                cup.ingredients.add(t.getAsString());
+        if (stack.hasTag()) {
+            assert stack.getTag() != null;
+            if (stack.getTag().contains("ingredients", Tag.TAG_LIST)) {
+                stack.getTag().getList("ingredients", Tag.TAG_STRING)
+                        .forEach(t -> cup.ingredients.add(t.getAsString()));
             }
         }
         return cup;
@@ -39,13 +40,5 @@ public class IngredientCup {
         }
         tag.put("ingredients", list);
         tag.putInt("ingredientCount", ingredients.size());
-    }
-
-    public boolean isEmpty() {
-        return ingredients.isEmpty();
-    }
-
-    public List<String> getIngredients() {
-        return ingredients;
     }
 }

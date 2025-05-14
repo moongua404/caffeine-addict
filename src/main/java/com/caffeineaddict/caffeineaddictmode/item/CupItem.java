@@ -26,17 +26,15 @@ public class CupItem extends RenderableItem {
     }
 
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            consumer.accept(new IClientItemExtensions() {
-                private final BlockEntityWithoutLevelRenderer renderer = new CupItemRenderer();
+    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> consumer.accept(new IClientItemExtensions() {
+            private final BlockEntityWithoutLevelRenderer renderer = new CupItemRenderer();
 
-                @Override
-                public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                    return renderer;
-                }
-            });
-        });
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return renderer;
+            }
+        }));
     }
 
 

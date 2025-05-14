@@ -29,6 +29,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
     );
 
+    @SuppressWarnings("removal")
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }

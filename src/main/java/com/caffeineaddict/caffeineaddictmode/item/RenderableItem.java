@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.fml.DistExecutor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 렌더러가 필요한 아이템의 베이스 클래스.
@@ -16,7 +17,7 @@ public class RenderableItem extends Item {
     }
 
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+    public void initializeClient(@NotNull Consumer<IClientItemExtensions> consumer) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             consumer.accept(new IClientItemExtensions() {
                 private final BlockEntityWithoutLevelRenderer renderer = getRenderer();

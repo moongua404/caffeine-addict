@@ -12,35 +12,48 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class CupItemRenderer extends BlockEntityWithoutLevelRenderer {
 
+    @SuppressWarnings("removal")
     private static final ResourceLocation BASE_TEXTURE = new ResourceLocation("caffeineaddictmode",
             "textures/item/empty_cup.png");
 
+    @SuppressWarnings("DataFlowIssue")
     public CupItemRenderer() {
         super(null, null);
     }
 
     @Override
-    public void renderByItem(ItemStack stack, TransformType transformType,
-                             PoseStack poseStack, MultiBufferSource buffer,
+    public void renderByItem(ItemStack stack, @NotNull TransformType transformType,
+                             @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
                              int light, int overlay) {
 
-        // 1. 기본 컵 텍스처 렌더링
-        renderTextureDirect(BASE_TEXTURE, poseStack, buffer, light, overlay, 0.0F);
+        renderBasicTexture(poseStack, buffer, light, overlay);
 
-        // 2. 오버레이 렌더링 (NBT 기반)
-        if (stack.hasTag() && stack.getTag().contains("ingredients", Tag.TAG_LIST)) {
-            ListTag ingredients = stack.getTag().getList("ingredients", Tag.TAG_STRING);
-            float zOffset = 0.01f;
-
-            for (Tag tag : ingredients) {
-                String name = tag.getAsString();
-                ResourceLocation texture = new ResourceLocation("caffeineaddictmode", "textures/item/" + name + ".png");
-                renderTextureDirect(texture, poseStack, buffer, light, overlay, zOffset);
-                zOffset += 0.001f;
+        if (stack.hasTag()) {
+            assert stack.getTag() != null;
+            if (stack.getTag().contains("ingredients", Tag.TAG_LIST)) {
+                renderOverlayTexture(stack.getTag().getList("ingredients", Tag.TAG_STRING), poseStack, buffer, light,
+                        overlay);
             }
+        }
+    }
+
+    private void renderBasicTexture(PoseStack poseStack, MultiBufferSource buffer, int light, int overlay) {
+        renderTextureDirect(BASE_TEXTURE, poseStack, buffer, light, overlay, 0.0F);
+    }
+
+    private void renderOverlayTexture(ListTag ingredients, PoseStack poseStack, MultiBufferSource buffer,
+                                      int light, int overlay) {
+        float zOffset = 0.01f;
+        for (Tag tag : ingredients) {
+            String name = tag.getAsString();
+            @SuppressWarnings("removal")
+            ResourceLocation texture = new ResourceLocation("caffeineaddictmode", "textures/item/" + name + ".png");
+            renderTextureDirect(texture, poseStack, buffer, light, overlay, zOffset);
+            zOffset += 0.001f;
         }
     }
 

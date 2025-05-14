@@ -18,6 +18,7 @@ public class CaffeineAddictMode {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public CaffeineAddictMode() {
+        @SuppressWarnings("removal")
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
@@ -26,7 +27,7 @@ public class CaffeineAddictMode {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        
+
     }
 
     @EventBusSubscriber(modid = MOD_ID, bus = Bus.MOD)

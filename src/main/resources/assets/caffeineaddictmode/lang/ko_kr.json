@@ -1,5 +1,19 @@
 {
   "itemGroup.caffeinemodetab": "카페인 중독 모드",
   "advancement.caffeineaddictmode.entering_server.title": "서버 입장",
-  "advancement.caffeineaddictmode.entering_server.desc": "서버에 들어오는 것이 카페인 중독의 시작입니다."
+  "advancement.caffeineaddictmode.entering_server.desc": "서버에 들어오는 것이 카페인 중독의 시작입니다.",
+  "item.caffeineaddictmode.coffee_bean": "커피콩",
+  "item.caffeineaddictmode.roasted_coffee_bean": "볶은 커피콩",
+  "item.caffeineaddictmode.coffee_powder": "커피 가루",
+  "item.caffeineaddictmode.milk": "우유",
+  "item.caffeineaddictmode.ice": "얼음",
+  "item.caffeineaddictmode.hot_water": "뜨거운 물",
+  "item.caffeineaddictmode.cool_water": "차가운 물",
+  "item.caffeineaddictmode.cup": "컵",
+  "item.caffeineaddictmode.espresso": "에스프레소",
+  "item.caffeineaddictmode.ice_water": "얼음 물",
+  "item.caffeineaddictmode.americano": "아메리카노",
+  "item.caffeineaddictmode.ice_americano": "아이스 아메리카노",
+  "item.caffeineaddictmode.latte": "라떼",
+  "item.caffeineaddictmode.ice_latte": "아이스 라떼"
 }

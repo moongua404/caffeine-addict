@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caffeineaddictmode:cool_water"
+    },
+    {
+      "item": "caffeineaddictmode:ice"
+    }
+  ],
+  "result": {
+    "item": "caffeineaddictmode:ice_water"
+  }
+}

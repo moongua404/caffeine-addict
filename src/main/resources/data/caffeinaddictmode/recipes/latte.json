@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caffeineaddictmode:espresso"
+    },
+    {
+      "item": "caffeineaddictmode:steam_milk"
+    }
+  ],
+  "result": {
+    "item": "caffeineaddictmode:latte"
+  }
+}

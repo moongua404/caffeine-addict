@@ -9,10 +9,13 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.client.renderer.GameRenderer;
 
 public class GrinderScreen extends AbstractContainerScreen<GrinderMenu> {
     private static final ResourceLocation TEXTURE =
             new ResourceLocation(CaffeineAddictMode.MOD_ID, "textures/gui/grinder_gui.png");
+    private static final ResourceLocation ARROW_TEXTURE =
+            new ResourceLocation(CaffeineAddictMode.MOD_ID, "textures/gui/arrow.png");
 
     public GrinderScreen(GrinderMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
@@ -20,10 +23,27 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderMenu> {
         this.imageHeight = 166;
     }
 
+    // 진행바 표시
     @Override
-    protected void renderBg(com.mojang.blaze3d.vertex.PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
         RenderSystem.setShaderTexture(0, TEXTURE);
         blit(poseStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+
+        if (menu.isCrafting()) {
+            int progress = menu.getScaledProgress();
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F); // 누락 시 알파 0.0으로 보이지 않게 됨
+            blit(poseStack, this.leftPos + 10, this.topPos + 10, 0, 0, 24, 17, 24, 17);
+        }
+//        if (menu.isCrafting()) {
+//            int progress = menu.getScaledProgress();
+//
+//            RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
+//            blit(poseStack, this.leftPos + 10, this.topPos + 10, 0, 0, 24, 17);
+//            //RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
+//            //blit(poseStack, this.leftPos + 78, this.topPos + 34, 0, 0, progress, 17);
+//        }
     }
 
     @Override

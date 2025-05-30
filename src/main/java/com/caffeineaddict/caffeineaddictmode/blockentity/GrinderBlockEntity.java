@@ -53,6 +53,18 @@ public class GrinderBlockEntity extends BlockEntity implements MenuProvider {
         return itemHandler;
     }
 
+    public int getProgress() {
+        return this.progress;
+    }
+    public int getMaxProgress() {
+        return 100;
+    }
+    public int getScaledProgress() {
+        int maxProgress = 100; // 전체 작업 시간
+        int progressBarWidth = 24; // 진행 바 너비(px)
+        return (progress * progressBarWidth) / maxProgress;
+    }
+
     @Nullable
     public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
         return new GrinderMenu(id, playerInventory, this);

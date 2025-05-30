@@ -47,6 +47,17 @@ public class GrinderMenu extends AbstractContainerMenu {
         }
     }
 
+    public boolean isCrafting() {
+        return blockEntity.getProgress() > 0;
+    }
+
+    public int getScaledProgress() {
+        int progress = blockEntity.getProgress();
+        int maxProgress = blockEntity.getMaxProgress();
+        int barWidth = 24; // 진행바 최대 길이 (픽셀 단위)
+        return maxProgress != 0 && progress != 0 ? progress * barWidth / maxProgress : 0;
+    }
+
     @Override
     public boolean stillValid(Player player) {
         return true;

@@ -31,19 +31,14 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderMenu> {
 
         if (menu.isCrafting()) {
             int progress = menu.getScaledProgress();
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F); // 누락 시 알파 0.0으로 보이지 않게 됨
-            blit(poseStack, this.leftPos + 10, this.topPos + 10, 0, 0, 24, 17, 24, 17);
+
+            if (progress > 0) {
+                RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                blit(poseStack, this.leftPos + 78, this.topPos + 34, 0, 0, progress + 1, 17, 24, 17);
+            }
         }
-//        if (menu.isCrafting()) {
-//            int progress = menu.getScaledProgress();
-//
-//            RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
-//            blit(poseStack, this.leftPos + 10, this.topPos + 10, 0, 0, 24, 17);
-//            //RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
-//            //blit(poseStack, this.leftPos + 78, this.topPos + 34, 0, 0, progress, 17);
-//        }
     }
 
     @Override

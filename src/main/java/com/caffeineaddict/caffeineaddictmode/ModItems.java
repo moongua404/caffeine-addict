@@ -1,5 +1,8 @@
 package com.caffeineaddict.caffeineaddictmode;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -63,32 +66,86 @@ public class ModItems {
      */
     public static final RegistryObject<Item> ESPRESSO = ITEMS.register(
             "espresso",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new Item(new Item.Properties()
+                    .tab(ModCreativeTab.CAFFEINE_TAB)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(0.3f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
+                            .alwaysEat()
+                            .build()
+                    )
+            )
     );
 
     public static final RegistryObject<Item> ICE_WATER = ITEMS.register(
             "ice_water",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new Item(new Item.Properties()
+                    .tab(ModCreativeTab.CAFFEINE_TAB)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(0.3f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
+                            .alwaysEat()
+                            .build()
+                    )
+            )
     );
 
     public static final RegistryObject<Item> AMERICANO = ITEMS.register(
             "americano",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new Item(new Item.Properties()
+                    .tab(ModCreativeTab.CAFFEINE_TAB)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(0.3f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
+                            .alwaysEat()
+                            .build()
+                    )
+            )
     );
 
     public static final RegistryObject<Item> ICE_AMERICANO = ITEMS.register(
             "ice_americano",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new Item(new Item.Properties()
+                    .tab(ModCreativeTab.CAFFEINE_TAB)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(0.3f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
+                            .alwaysEat()
+                            .build()
+                    )
+            )
     );
 
     public static final RegistryObject<Item> LATTE = ITEMS.register(
             "latte",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new Item(new Item.Properties()
+                    .tab(ModCreativeTab.CAFFEINE_TAB)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(0.3f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
+                            .alwaysEat()
+                            .build()
+                    )
+            )
     );
 
     public static final RegistryObject<Item> ICE_LATTE = ITEMS.register(
             "ice_latte",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new Item(new Item.Properties()
+                    .tab(ModCreativeTab.CAFFEINE_TAB)
+                    .food(new FoodProperties.Builder()
+                            .nutrition(2)
+                            .saturationMod(0.3f)
+                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
+                            .alwaysEat()
+                            .build()
+                    )
+            )
     );
 
     public static void register() {

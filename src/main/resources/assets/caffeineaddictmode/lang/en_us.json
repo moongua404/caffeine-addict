@@ -15,5 +15,6 @@
   "item.caffeineaddictmode.americano": "Americano",
   "item.caffeineaddictmode.ice_americano": "Iced Americano",
   "item.caffeineaddictmode.latte": "Latte",
-  "item.caffeineaddictmode.ice_latte": "Iced Latte"
+  "item.caffeineaddictmode.ice_latte": "Iced Latte",
+  "block.caffeineaddictmode.water_dispenser": "Water Dispenser"
 }

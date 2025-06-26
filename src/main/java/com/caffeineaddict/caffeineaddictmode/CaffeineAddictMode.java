@@ -1,6 +1,12 @@
 package com.caffeineaddict.caffeineaddictmode;
 
+import com.caffeineaddict.caffeineaddictmode.client.screen.WaterDispenserScreen;
+import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,21 +25,27 @@ public class CaffeineAddictMode {
 
     public CaffeineAddictMode() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModMenus.MENUS.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
-
-        ModItems.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(PacketHandler::register);
     }
 
     @EventBusSubscriber(modid = MOD_ID, bus = Bus.MOD)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
-            
+            event.enqueueWork(() -> {
+                MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
+            });
         }
     }
 }

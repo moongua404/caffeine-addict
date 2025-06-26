@@ -1,8 +1,10 @@
 package com.caffeineaddict.caffeineaddictmode;
 
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -147,6 +149,15 @@ public class ModItems {
                     )
             )
     );
+
+    /**
+     * Block
+     */
+    public static final RegistryObject<Item> WATER_DISPENSER_ITEM =
+            ITEMS.register("water_dispenser", () ->
+                    new BlockItem(ModBlocks.WATER_DISPENSER.get(),
+                            new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            );
 
     public static void register() {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());

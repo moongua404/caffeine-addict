@@ -3,6 +3,7 @@ package com.caffeineaddict.caffeineaddictmode;
 import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.menu.ModMenuTypes;
 import com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen;
+import com.caffeineaddict.caffeineaddictmode.sound.ModSoundEvents;
 
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -53,6 +54,7 @@ public class CaffeineAddictMode {
         GrinderBlockEntities.register();
         ModItems.register();
         ModMenuTypes.MENUS.register(modEventBus);
+        ModSoundEvents.SOUNDS.register(modEventBus);
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);

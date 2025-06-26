@@ -2,6 +2,7 @@ package com.caffeineaddict.caffeineaddictmode.screen;
 
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.menu.GrinderMenu;
+import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -30,11 +31,27 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderMenu> {
         RenderSystem.setShaderTexture(0, TEXTURE);
         blit(poseStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        blit(poseStack, this.leftPos + 10, this.topPos + 10, 0, 0, 24, 17, 24, 17);
+        // 진행 바 (arrow)
+        int progress = menu.getScaledProgress(); // 0~24
+
+        if (progress > 0) {
+            RenderSystem.enableBlend();
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
+            RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+            blit(
+                    poseStack,
+                    this.leftPos + 78, this.topPos + 34, // 실제 위치
+                    0, 0,
+                    progress, 17
+            );
+
+            RenderSystem.disableBlend(); // 끝났으면 비활성화
+        }
     }
+
 
     @Override
     protected void renderLabels(PoseStack poseStack, int mouseX, int mouseY) {

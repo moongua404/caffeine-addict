@@ -2,6 +2,7 @@ package com.caffeineaddict.caffeineaddictmode.blockentity;
 
 import com.caffeineaddict.caffeineaddictmode.menu.GrinderMenu;
 import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.sound.ModSoundEvents;
 
 import javax.annotation.Nullable;
 import javax.annotation.Nonnull;
@@ -26,12 +27,19 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+
 
 public class GrinderBlockEntity extends BlockEntity implements MenuProvider {
-
     private final ItemStackHandler itemHandler = new ItemStackHandler(2); // 0=input, 1=output
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     private int progress = 0;
+//    private static final ResourceLocation GRINDER_SOUND_LOC = new ResourceLocation("caffeineaddictmode", "block.grinder");
+//    private static final SoundEvent GRINDER_SOUND = SoundEvent.createVariableRangeEvent(GRINDER_SOUND_LOC);
+
 
     public GrinderBlockEntity(BlockPos pos, BlockState state) {
         super(GrinderBlockEntities.GRINDER.get(), pos, state);
@@ -91,6 +99,10 @@ public class GrinderBlockEntity extends BlockEntity implements MenuProvider {
             }
         } else {
             entity.progress = 0; // 입력이 올바르지 않으면 리셋
+        }
+
+        if (entity.progress == 1) { // 작업 시작 시 한 번만
+            level.playSound(null, pos, ModSoundEvents.GRINDER_SOUND.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
         }
 
         entity.setChanged(); // 저장 플래그

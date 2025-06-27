@@ -30,9 +30,13 @@ public class ModItems {
             ITEMS.register("ground_coffee", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
-    public static RegistryObject<Item> getGrinderItem() {
-        return ModBlocks.GRINDER_ITEM;
-    }
+//    public static RegistryObject<Item> getGrinderItem() {
+//        return ModBlocks.GRINDER_ITEM;
+//    }
+    public static final RegistryObject<Item> GRINDER_ITEM =
+            ModItems.ITEMS.register("grinder", () ->
+                    new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            );
     /**
      * Ingredients
      */

@@ -1,7 +1,7 @@
 package com.caffeineaddict.caffeineaddictmode.block.entity;
 
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
-import com.caffeineaddict.caffeineaddictmode.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

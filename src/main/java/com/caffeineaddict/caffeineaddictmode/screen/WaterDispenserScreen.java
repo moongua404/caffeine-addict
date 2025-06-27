@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode.client.screen;
+package com.caffeineaddict.caffeineaddictmode.screen;
 
 import com.caffeineaddict.caffeineaddictmode.menu.WaterDispenserMenu;
 import com.mojang.blaze3d.systems.RenderSystem;

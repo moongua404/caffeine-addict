@@ -2,7 +2,19 @@
   "itemGroup.caffeinemodetab": "Caffeine Addict Mode",
   "advancement.caffeineaddictmode.entering_server.title": "Entering Server",
   "advancement.caffeineaddictmode.entering_server.desc": "Entering server is the beginning of caffeine addiction.",
-
   "item.caffeineaddictmode.coffee_bean": "Coffee Bean",
-  "item.caffeineaddictmode.roasted_coffee_bean": "Roasted Coffee Bean"
+  "item.caffeineaddictmode.roasted_coffee_bean": "Roasted Coffee Bean",
+  "item.caffeineaddictmode.coffee_powder": "Coffee Powder",
+  "item.caffeineaddictmode.milk": "Milk",
+  "item.caffeineaddictmode.ice": "Ice",
+  "item.caffeineaddictmode.hot_water": "Hot Water",
+  "item.caffeineaddictmode.cool_water": "Cool Water",
+  "item.caffeineaddictmode.cup": "Cup",
+  "item.caffeineaddictmode.espresso": "Espresso",
+  "item.caffeineaddictmode.ice_water": "Ice Water",
+  "item.caffeineaddictmode.americano": "Americano",
+  "item.caffeineaddictmode.ice_americano": "Iced Americano",
+  "item.caffeineaddictmode.latte": "Latte",
+  "item.caffeineaddictmode.ice_latte": "Iced Latte",
+  "block.caffeineaddictmode.water_dispenser": "Water Dispenser"
 }

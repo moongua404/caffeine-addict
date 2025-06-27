@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caffeineaddictmode:espresso"
+    },
+    {
+      "item": "caffeineaddictmode:hot_water"
+    },
+    {
+      "item": "caffeineaddictmode:cup"
+    }
+  ],
+  "result": {
+    "item": "caffeineaddictmode:americano"
+  }
+}

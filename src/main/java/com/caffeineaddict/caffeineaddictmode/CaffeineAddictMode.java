@@ -14,6 +14,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
+import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
+import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
+import com.caffeineaddict.caffeineaddictmode.screen.WaterDispenserScreen;
+import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,21 +55,26 @@ public class CaffeineAddictMode {
         modEventBus.addListener(this::commonSetup);
         //modEventBus.addListener(this::clientSetup);
 
-        ModBlocks.register();
+        ModBlocks.BLOCKS.register(modEventBus);
         GrinderBlockEntities.register();
-        ModItems.register();
+        ModItems.ITEMS.register(modEventBus);
         ModMenuTypes.MENUS.register(modEventBus);
         ModSoundEvents.SOUNDS.register(modEventBus);
+        ModMenus.MENUS.register(modEventBus);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
 
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
 
         FMLJavaModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
+        modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {}
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(PacketHandler::register);
+    }
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             net.minecraft.client.gui.screens.MenuScreens.register(
@@ -78,6 +90,9 @@ public class CaffeineAddictMode {
         public static void clientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenuTypes.GRINDER_MENU.get(), GrinderScreen::new);
+        public static void onClientSetup(final FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+                MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
             });
         }
     }

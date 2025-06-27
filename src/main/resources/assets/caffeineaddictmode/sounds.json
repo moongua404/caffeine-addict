@@ -1,0 +1,12 @@
+{
+  "block.grinder": {
+    "category": "block",
+    "subtitle": "Grinder working",
+    "sounds": [
+      {
+        "name": "caffeineaddictmode:block/grinder",
+        "stream": true
+      }
+    ]
+  }
+}

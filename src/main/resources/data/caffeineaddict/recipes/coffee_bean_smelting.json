@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "caffeineaddictmode:coffee_bean"
+  },
+  "result": "caffeineaddictmode:roasted_coffee_bean",
+  "experience": 0.35,
+  "cookingtime": 200
+}

@@ -1,17 +1,13 @@
 package com.caffeineaddict.caffeineaddictmode;
 
-import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlock;
+import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlock;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 

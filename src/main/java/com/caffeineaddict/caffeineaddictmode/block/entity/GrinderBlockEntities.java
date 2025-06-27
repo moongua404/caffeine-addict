@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode.blockentity;
+package com.caffeineaddict.caffeineaddictmode.block.entity;
 
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.ModBlocks;

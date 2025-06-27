@@ -1,15 +1,13 @@
 package com.caffeineaddict.caffeineaddictmode.menu;
 
-import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntity;
+import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlockEntity;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraft.world.inventory.ContainerData;

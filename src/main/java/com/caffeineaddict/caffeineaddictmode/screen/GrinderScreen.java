@@ -2,7 +2,6 @@ package com.caffeineaddict.caffeineaddictmode.screen;
 
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.menu.GrinderMenu;
-import com.caffeineaddict.caffeineaddictmode.blockentity.GrinderBlockEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 

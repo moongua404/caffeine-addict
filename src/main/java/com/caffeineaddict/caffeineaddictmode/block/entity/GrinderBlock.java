@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode.blockentity;
+package com.caffeineaddict.caffeineaddictmode.block.entity;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;

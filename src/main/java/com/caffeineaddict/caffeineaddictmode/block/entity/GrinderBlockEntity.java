@@ -1,4 +1,4 @@
-package com.caffeineaddict.caffeineaddictmode.blockentity;
+package com.caffeineaddict.caffeineaddictmode.block.entity;
 
 import com.caffeineaddict.caffeineaddictmode.menu.GrinderMenu;
 import com.caffeineaddict.caffeineaddictmode.ModItems;
@@ -22,15 +22,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.ContainerData;
 
 

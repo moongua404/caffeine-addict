@@ -87,9 +87,6 @@ public class CaffeineAddictMode {
     @Mod.EventBusSubscriber(modid = CaffeineAddictMode.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public class ClientModEvents {
         @SubscribeEvent
-        public static void clientSetup(final FMLClientSetupEvent event) {
-            event.enqueueWork(() -> {
-                MenuScreens.register(ModMenuTypes.GRINDER_MENU.get(), GrinderScreen::new);
         public static void onClientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);

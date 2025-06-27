@@ -26,29 +26,15 @@ public class GrinderScreen extends AbstractContainerScreen<GrinderMenu> {
 
     // 진행바 표시
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(PoseStack poseStack, float partialTick, int mouseX, int mouseY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        blit(poseStack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        RenderSystem.setShaderTexture(0, TEXTURE); // grinder_gui.png
+        blit(poseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
-        // 진행 바 (arrow)
-        int progress = menu.getScaledProgress(); // 0~24
-
-        if (progress > 0) {
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-            RenderSystem.setShaderTexture(0, ARROW_TEXTURE);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-
-            blit(
-                    poseStack,
-                    this.leftPos + 78, this.topPos + 34, // 실제 위치
-                    0, 0,
-                    progress, 17
-            );
-
-            RenderSystem.disableBlend(); // 끝났으면 비활성화
+        if (menu.isCrafting()) {
+            RenderSystem.setShaderTexture(0, ARROW_TEXTURE); // arrow.png
+            int progress = menu.getScaledProgress(); // 0~24 크기
+            blit(poseStack, leftPos + 79, topPos + 34, 0, 0, progress, 17, 24, 17);
         }
     }
 

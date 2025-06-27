@@ -31,12 +31,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.inventory.ContainerData;
 
 
 public class GrinderBlockEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemHandler = new ItemStackHandler(2); // 0=input, 1=output
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
     private int progress = 0;
+    private int maxProgress = 100;
 //    private static final ResourceLocation GRINDER_SOUND_LOC = new ResourceLocation("caffeineaddictmode", "block.grinder");
 //    private static final SoundEvent GRINDER_SOUND = SoundEvent.createVariableRangeEvent(GRINDER_SOUND_LOC);
 
@@ -106,5 +108,28 @@ public class GrinderBlockEntity extends BlockEntity implements MenuProvider {
         }
 
         entity.setChanged(); // 저장 플래그
+    }
+
+    private final ContainerData data = new ContainerData() {
+        public int get(int index) {
+            return switch (index) {
+                case 0 -> progress;
+                case 1 -> maxProgress;
+                default -> 0;
+            };
+        }
+
+        public void set(int index, int value) {
+            if (index == 0) progress = value;
+            if (index == 1) maxProgress = value;
+        }
+
+        public int getCount() {
+            return 2;
+        }
+    };
+
+    public ContainerData getContainerData() {
+        return data;
     }
 }

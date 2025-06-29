@@ -1,6 +1,8 @@
 package com.caffeineaddict.caffeineaddictmode;
 
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
+import com.caffeineaddict.caffeineaddictmode.drink.Coffee;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.CreativeModeTab;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -30,9 +32,6 @@ public class ModItems {
             ITEMS.register("ground_coffee", () ->
                     new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB)));
 
-//    public static RegistryObject<Item> getGrinderItem() {
-//        return ModBlocks.GRINDER_ITEM;
-//    }
     public static final RegistryObject<Item> GRINDER_ITEM =
             ModItems.ITEMS.register("grinder", () ->
                     new BlockItem(ModBlocks.GRINDER_BLOCK.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
@@ -141,16 +140,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> LATTE = ITEMS.register(
             "latte",
-            () -> new Item(new Item.Properties()
-                    .tab(ModCreativeTab.CAFFEINE_TAB)
-                    .food(new FoodProperties.Builder()
-                            .nutrition(2)
-                            .saturationMod(0.3f)
-                            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 15 * 20, 0), 1.0f)
-                            .alwaysEat()
-                            .build()
-                    )
-            )
+            () -> new Coffee(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_LATTE = ITEMS.register(

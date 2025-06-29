@@ -11,7 +11,28 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+/**
+ * 음료 아이템을 정의.
+ * 포션 효과 적용, 스택 불가능, 사용 후 빈 컵 드롭
+ * <p>
+ * {@code Coffee}에서 확장하여 사용
+ *
+ * @author @moongua404
+ */
 public class Drink extends Item {
+    protected final MobEffect effect;
+    protected int duration;     // 초 단위
+    protected int amplifier;
+
+    /**
+     * Drink 생성자
+     *
+     * @param nutrition   음식의 포만감 수치
+     * @param saturation  음식의 포화도 수치
+     * @param effect      적용할 효과 (예: 이동 속도 향상 등)
+     * @param duration    효과 지속 시간 (초 단위)
+     * @param amplifier   효과 증폭 수치
+     */
     public Drink(int nutrition, float saturation, MobEffect effect, int duration, int amplifier) {
         super(new Item.Properties()
                 .tab(ModCreativeTab.CAFFEINE_TAB)
@@ -19,23 +40,42 @@ public class Drink extends Item {
                 .food(new FoodProperties.Builder()
                         .nutrition(nutrition)
                         .saturationMod(saturation)
-                        .effect(() -> new MobEffectInstance(effect, duration * 20, amplifier), 1.0f)
                         .alwaysEat()
                         .build()));
+        this.effect = effect;
+        this.duration = duration;
+        this.amplifier = amplifier;
     }
 
+    protected MobEffectInstance createEffectInstance(ItemStack stack) {
+        return new MobEffectInstance(effect, duration * 20, amplifier); // 기본 고정 효과
+    }
+
+    /**
+     * 아이템 사용 후 호출
+     * 빈 컵을 지급 (크리에이티브 모드일 경우 지급하지 않음)
+     */
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         ItemStack result = super.finishUsingItem(stack, level, entity);
+        if (!level.isClientSide) {
+            entity.addEffect(createEffectInstance(stack));
 
-        if (!level.isClientSide && entity instanceof Player player && !player.getAbilities().instabuild) {
-            ItemStack drop = new ItemStack(ModItems.CUP.get());
-
-            if (!player.getInventory().add(drop)) {
-                player.drop(drop, false);
+            if (entity instanceof Player player && !player.getAbilities().instabuild) {
+                ItemStack drop = new ItemStack(ModItems.CUP.get());
+                if (!player.getInventory().add(drop)) {
+                    player.drop(drop, false);
+                }
             }
         }
-
         return result;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public void setAmplifier(int amplifier) {
+        this.amplifier = amplifier;
     }
 }

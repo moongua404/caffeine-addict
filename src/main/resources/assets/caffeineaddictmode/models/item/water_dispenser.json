@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "caffeineaddictmode:block/water_dispenser"
-  }
+  "parent": "caffeineaddictmode:block/water_dispenser_block"
 }

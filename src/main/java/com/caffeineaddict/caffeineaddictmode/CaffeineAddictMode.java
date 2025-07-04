@@ -18,9 +18,6 @@ import com.caffeineaddict.caffeineaddictmode.network.PacketHandler;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
 import com.caffeineaddict.caffeineaddictmode.registry.ModMenus;
-import com.caffeineaddict.caffeineaddictmode.screen.WaterDispenserScreen;
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -88,7 +85,6 @@ public class CaffeineAddictMode {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
-                MenuScreens.register(ModMenus.WATER_DISPENSER.get(), WaterDispenserScreen::new);
             });
         }
     }

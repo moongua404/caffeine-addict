@@ -3,6 +3,7 @@ package com.caffeineaddict.caffeineaddictmode;
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.drink.Coffee;
 import com.caffeineaddict.caffeineaddictmode.drink.Drink;
+import java.util.List;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.CreativeModeTab;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlocks;
@@ -85,32 +86,32 @@ public class ModItems {
      */
     public static final RegistryObject<Item> ESPRESSO = ITEMS.register(
             "espresso",
-            () -> new Coffee(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_WATER = ITEMS.register(
             "ice_water",
-            () -> new Drink(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
+            () -> new Drink(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> AMERICANO = ITEMS.register(
             "americano",
-            () -> new Coffee(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_AMERICANO = ITEMS.register(
             "ice_americano",
-            () -> new Coffee(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> LATTE = ITEMS.register(
             "latte",
-            () -> new Coffee(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     public static final RegistryObject<Item> ICE_LATTE = ITEMS.register(
             "ice_latte",
-            () -> new Coffee(1, 1, MobEffects.MOVEMENT_SPEED, 15, 0)
+            () -> new Coffee(1, 1, List.of(MobEffects.MOVEMENT_SPEED), 15, 0)
     );
 
     /**

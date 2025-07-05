@@ -38,12 +38,12 @@ public class Coffee extends Drink {
      *
      * @param nutrition   음식의 포만감 수치
      * @param saturation  음식의 포화도 수치
-     * @param effect      적용할 효과
+     * @param effects     적용할 효과
      * @param duration    효과 지속 시간 (초)
      * @param amplifier   기본 증폭 수치
      */
-    public Coffee(int nutrition, float saturation, MobEffect effect, int duration, int amplifier) {
-        super(nutrition, saturation, effect, duration, amplifier);
+    public Coffee(int nutrition, float saturation, List<MobEffect> effects, int duration, int amplifier) {
+        super(nutrition, saturation, effects, duration, amplifier);
     }
 
     @Override
@@ -76,14 +76,25 @@ public class Coffee extends Drink {
     }
 
     @Override
-    protected MobEffectInstance createEffectInstance(ItemStack stack) {
+    protected List<MobEffectInstance> createEffectInstances(ItemStack stack) {
+        int star = getStar(stack);
+
+        return effects.stream()
+                .map(effect -> new MobEffectInstance(effect, duration * 20, star))
+                .toList();
+    }
+
+    private int getStar(ItemStack stack) {
         int star = 0;
 
         CompoundTag tag = stack.getTag();
         if (tag != null && tag.contains(TAG_STAR)) {
             star = tag.getInt(TAG_STAR);
         }
+        if (star <= 1) {
+            star = 1;
+        }
 
-        return new MobEffectInstance(effect, (10 + (star * 5)) * 20, star);
+        return star;
     }
 }

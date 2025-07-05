@@ -2,6 +2,7 @@ package com.caffeineaddict.caffeineaddictmode.drink;
 
 import com.caffeineaddict.caffeineaddictmode.ModCreativeTab;
 import com.caffeineaddict.caffeineaddictmode.ModItems;
+import java.util.List;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.Level;
  * @author @moongua404
  */
 public class Drink extends Item {
-    protected final MobEffect effect;
+    protected final List<MobEffect> effects;
     protected int duration;     // 초 단위
     protected int amplifier;
 
@@ -33,7 +34,7 @@ public class Drink extends Item {
      * @param duration    효과 지속 시간 (초 단위)
      * @param amplifier   효과 증폭 수치
      */
-    public Drink(int nutrition, float saturation, MobEffect effect, int duration, int amplifier) {
+    public Drink(int nutrition, float saturation, List<MobEffect> effects, int duration, int amplifier) {
         super(new Item.Properties()
                 .tab(ModCreativeTab.CAFFEINE_TAB)
                 .stacksTo(1)
@@ -42,13 +43,15 @@ public class Drink extends Item {
                         .saturationMod(saturation)
                         .alwaysEat()
                         .build()));
-        this.effect = effect;
+        this.effects = List.copyOf(effects);
         this.duration = duration;
         this.amplifier = amplifier;
     }
 
-    protected MobEffectInstance createEffectInstance(ItemStack stack) {
-        return new MobEffectInstance(effect, duration * 20, amplifier); // 기본 고정 효과
+    protected List<MobEffectInstance> createEffectInstances(ItemStack stack) {
+        return effects.stream()
+                .map(effect -> new MobEffectInstance(effect, duration * 20, amplifier))
+                .toList();
     }
 
     /**
@@ -59,7 +62,7 @@ public class Drink extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         ItemStack result = super.finishUsingItem(stack, level, entity);
         if (!level.isClientSide) {
-            entity.addEffect(createEffectInstance(stack));
+            createEffectInstances(stack).forEach(entity::addEffect);
 
             if (entity instanceof Player player && !player.getAbilities().instabuild) {
                 ItemStack drop = new ItemStack(ModItems.CUP.get());

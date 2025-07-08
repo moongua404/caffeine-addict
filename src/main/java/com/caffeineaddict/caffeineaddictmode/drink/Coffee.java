@@ -1,5 +1,6 @@
 package com.caffeineaddict.caffeineaddictmode.drink;
 
+import com.caffeineaddict.caffeineaddictmode.drink.dto.EffectDto;
 import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;
@@ -38,12 +39,11 @@ public class Coffee extends Drink {
      *
      * @param nutrition   음식의 포만감 수치
      * @param saturation  음식의 포화도 수치
-     * @param effects     적용할 효과
-     * @param duration    효과 지속 시간 (초)
+     * @param effects     적용할 효과와 지속 시간 (초)
      * @param amplifier   기본 증폭 수치
      */
-    public Coffee(int nutrition, float saturation, List<MobEffect> effects, int duration, int amplifier) {
-        super(nutrition, saturation, effects, duration, amplifier);
+    public Coffee(int nutrition, float saturation, List<EffectDto> effects, int amplifier) {
+        super(nutrition, saturation, effects, amplifier);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Coffee extends Drink {
         int star = getStar(stack);
 
         return effects.stream()
-                .map(effect -> new MobEffectInstance(effect, duration * 20, star))
+                .map(effect -> new MobEffectInstance(effect.getEffect(), effect.getDuration() * 20, star))
                 .toList();
     }
 
@@ -89,7 +89,7 @@ public class Coffee extends Drink {
 
         CompoundTag tag = stack.getTag();
         if (tag != null && tag.contains(TAG_STAR)) {
-            star = tag.getInt(TAG_STAR);
+            star = tag.getInt(TAG_STAR) - 1;
         }
         if (star <= 1) {
             star = 1;

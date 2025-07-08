@@ -2,6 +2,7 @@ package com.caffeineaddict.caffeineaddictmode.drink;
 
 import com.caffeineaddict.caffeineaddictmode.ModCreativeTab;
 import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.drink.dto.EffectDto;
 import java.util.List;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,8 +22,7 @@ import net.minecraft.world.level.Level;
  * @author @moongua404
  */
 public class Drink extends Item {
-    protected final List<MobEffect> effects;
-    protected int duration;     // 초 단위
+    protected final List<EffectDto> effects;
     protected int amplifier;
 
     /**
@@ -30,11 +30,10 @@ public class Drink extends Item {
      *
      * @param nutrition   음식의 포만감 수치
      * @param saturation  음식의 포화도 수치
-     * @param effect      적용할 효과 (예: 이동 속도 향상 등)
-     * @param duration    효과 지속 시간 (초 단위)
+     * @param effects     적용할 효과와 지속시간 쌍 (예: 이동 속도 향상 30초 등)
      * @param amplifier   효과 증폭 수치
      */
-    public Drink(int nutrition, float saturation, List<MobEffect> effects, int duration, int amplifier) {
+    public Drink(int nutrition, float saturation, List<EffectDto> effects, int amplifier) {
         super(new Item.Properties()
                 .tab(ModCreativeTab.CAFFEINE_TAB)
                 .stacksTo(1)
@@ -44,13 +43,12 @@ public class Drink extends Item {
                         .alwaysEat()
                         .build()));
         this.effects = List.copyOf(effects);
-        this.duration = duration;
         this.amplifier = amplifier;
     }
 
     protected List<MobEffectInstance> createEffectInstances(ItemStack stack) {
         return effects.stream()
-                .map(effect -> new MobEffectInstance(effect, duration * 20, amplifier))
+                .map(effect -> new MobEffectInstance(effect.getEffect(), effect.getDuration() * 20, amplifier))
                 .toList();
     }
 
@@ -72,10 +70,6 @@ public class Drink extends Item {
             }
         }
         return result;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public void setAmplifier(int amplifier) {

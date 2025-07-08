@@ -1,6 +1,7 @@
 package com.caffeineaddict.caffeineaddictmode.block.entity;
 
 import com.caffeineaddict.caffeineaddictmode.ModItems;
+import com.caffeineaddict.caffeineaddictmode.block.WaterDispenserBlock;
 import com.caffeineaddict.caffeineaddictmode.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,13 +26,12 @@ public class WaterDispenserBlockEntity extends BlockEntity {
         if (waterLevel < MAX_WATER) {
             waterLevel = Math.min(MAX_WATER, waterLevel + 10);
             setChanged();
-            System.out.println("[정수기] HOT WATER 요청, 현재 수량: " + waterLevel);
         }
     }
 
     public void giveHotWater(Player player) {
         if (waterLevel > 0 && level instanceof ServerLevel serverLevel) {
-            Direction facing = Direction.NORTH; // 나중엔 BlockState에서 가져오면 됨
+            Direction facing = getBlockState().getValue(WaterDispenserBlock.FACING);
             Vec3 posVec = Vec3.atCenterOf(worldPosition).add(Vec3.atLowerCornerOf(facing.getNormal()).scale(0.5));
             ItemStack hotWater = new ItemStack(ModItems.HOT_WATER.get());
 
@@ -47,7 +47,7 @@ public class WaterDispenserBlockEntity extends BlockEntity {
 
     public void giveCoolWater(Player player) {
         if (waterLevel > 0 && level instanceof ServerLevel serverLevel) {
-            Direction facing = Direction.NORTH; // 향후 BlockState에서 받아오면 동적으로 가능
+            Direction facing = getBlockState().getValue(WaterDispenserBlock.FACING);
             Vec3 posVec = Vec3.atCenterOf(worldPosition)
                     .add(Vec3.atLowerCornerOf(facing.getNormal()).scale(0.5));
             ItemStack coolWater = new ItemStack(ModItems.COOL_WATER.get());
@@ -58,7 +58,7 @@ public class WaterDispenserBlockEntity extends BlockEntity {
                     0.1,
                     facing.step().z() * 0.2
             );
-            item.setPickUpDelay(10);  // 줍기 지연
+            item.setPickUpDelay(10);
 
             serverLevel.addFreshEntity(item);
             waterLevel--;

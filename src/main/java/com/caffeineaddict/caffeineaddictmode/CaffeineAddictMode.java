@@ -6,6 +6,8 @@ import com.caffeineaddict.caffeineaddictmode.screen.GrinderScreen;
 import com.caffeineaddict.caffeineaddictmode.sound.ModSoundEvents;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.BlockItem;
@@ -49,7 +51,7 @@ public class CaffeineAddictMode {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
-        //modEventBus.addListener(this::clientSetup);
+        modEventBus.addListener(this::clientSetup);
 
         ModBlocks.BLOCKS.register(modEventBus);
         GrinderBlockEntities.register();
@@ -84,8 +86,7 @@ public class CaffeineAddictMode {
     public class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
-            event.enqueueWork(() -> {
-            });
+            event.enqueueWork(() -> ItemBlockRenderTypes.setRenderLayer(ModBlocks.COFFEE_CROP.get(), RenderType.cutout()));
         }
     }
 }

@@ -14,6 +14,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -44,7 +45,7 @@ public class ModItems {
      */
     public static final RegistryObject<Item> COFFEE_BEAN = ITEMS.register(
             "coffee_bean",
-            () -> new Item(new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
+            () -> new ItemNameBlockItem(ModBlocks.COFFEE_CROP.get(), new Item.Properties().tab(ModCreativeTab.CAFFEINE_TAB))
     );
 
     public static final RegistryObject<Item> ROASTED_COFFEE_BEAN = ITEMS.register(

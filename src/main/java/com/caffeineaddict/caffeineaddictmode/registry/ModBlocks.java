@@ -3,9 +3,11 @@ package com.caffeineaddict.caffeineaddictmode.registry;
 import com.caffeineaddict.caffeineaddictmode.CaffeineAddictMode;
 import com.caffeineaddict.caffeineaddictmode.block.CoffeeCropBlock;
 import com.caffeineaddict.caffeineaddictmode.block.WaterDispenserBlock;
+import com.caffeineaddict.caffeineaddictmode.block.WildCoffeeBushBlock;
 import com.caffeineaddict.caffeineaddictmode.block.entity.GrinderBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -28,6 +30,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> COFFEE_CROP =
             BLOCKS.register("coffee_crop", () ->
                     new CoffeeCropBlock(BlockBehaviour.Properties.copy(Blocks.CARROTS)));
+
+    public static final RegistryObject<Block> WILD_COFFEE_BUSH =
+            BLOCKS.register("wild_coffee_bush",
+                    () -> new WildCoffeeBushBlock(BlockBehaviour.Properties
+                            .of(Material.PLANT)
+                            .noCollission()
+                            .instabreak()
+                            .sound(SoundType.GRASS)));
 
     public static void register() {
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
